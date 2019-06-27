@@ -8,7 +8,8 @@ const server = createServer((req, res) => {
   res.setHeader('Content-Type', 'text/html');
 
   if(pathname === '/index.html') {
-    fs.readFile('public/index.html', (err,  data) => {  
+    fs.readFile('public/index.html', { encoding: 'utf8' }, (err,  data) => { 
+      if(err) throw new Error(err);
       res.end(data);
     });
   } else {
@@ -20,5 +21,8 @@ const server = createServer((req, res) => {
 server.listen(7890, () => {
   console.log('listening to 7890');
 });
+
+module.exports = server;
+
 
 
