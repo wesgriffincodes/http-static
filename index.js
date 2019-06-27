@@ -1,5 +1,15 @@
-const app = require('./lib/app');
+const { createServer } = require('http');
+const { parse } = require('url');
 
-app.listen(3333, () =>  {
-    console.log('listening to 3333')
-})
+
+const server = createServer((req, res) => {
+  const { pathname } = parse(req.url);
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+  res.write('working');
+  res.end();
+});
+
+server.listen(7890, () => {
+  console.log('listening on 7890');
+});
